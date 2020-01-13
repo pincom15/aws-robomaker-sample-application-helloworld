@@ -1,0 +1,51 @@
+{
+    "wait": 5,
+    "scenarios": {
+        "BasicSlowTest": {
+            "robotEnvironmentVariables": {
+                "TIME_TEST_LENGTH_IN_SECONDS": "60",
+                "SPEED_IN_RADIANS_PER_SECOND": "0.2"
+            },
+            "simEnvironmentVariables": {}
+        },
+        "LongFastTest": {
+            "robotEnvironmentVariables": {
+                "TIME_TEST_LENGTH_IN_SECONDS": "120",
+                "SPEED_IN_RADIANS_PER_SECOND": "0.5"
+            },
+            "simEnvironmentVariables": {}
+        }
+    },
+    "simulations": [{
+        "scenarios": ["BasicSlowTest","LongFastTest"],
+        "params": {
+               "failureBehavior": "Fail",
+               "iamRole": "arn:aws:iam::603921118307:role/service-role/RoboMakerSimRobotMonitoring",
+               "maxJobDurationInSeconds": 600,
+               "outputLocation": { 
+                  "s3Bucket": "robomaker-jypark",
+                  "s3Prefix": "logs"
+               },
+               "robotApplications": [ 
+                  { 
+                     "application": "arn:aws:robomaker:us-east-1:603921118307:robot-application/RoboMakerHelloWorld/1578367865708",
+                     "applicationVersion": "$LATEST",
+                     "launchConfig": { 
+                        "launchFile": "rotate.launch",
+                        "packageName": "hello_world_robot"
+                     }
+                  }
+               ],
+               "simulationApplications": [ 
+                  { 
+                     "application": "arn:aws:robomaker:us-east-1:603921118307:simulation-application/RoboMakerSimulationHelloWorld/1578367840041",
+                     "applicationVersion": "$LATEST",
+                     "launchConfig": { 
+                        "launchFile": "empty_world.launch",
+                        "packageName": "hello_world_simulation"
+                     }
+                  }
+               ]
+        }
+    }]
+}
