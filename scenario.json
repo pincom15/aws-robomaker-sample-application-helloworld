@@ -20,7 +20,7 @@
         "scenarios": ["BasicSlowTest","LongFastTest"],
         "params": {
                "failureBehavior": "Fail",
-               "iamRole": "arn:aws:iam::603921118307:role/service-role/RoboMakerSimRobotMonitoring",
+               "iamRole": "arn:aws:iam::603921118307:role/robomaker-simulation-role-us-east-1",
                "maxJobDurationInSeconds": 600,
                "outputLocation": { 
                   "s3Bucket": "robomaker-jypark",
